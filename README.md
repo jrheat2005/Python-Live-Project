@@ -7,12 +7,13 @@ For the past two weeks of training at the tech academy, I worked on developing a
 
 
 ## Back End Stories
-*[Basic CRUD](#basic-crud)
+* [Basic CRUD](#basic-crud)
 * [TMDB API](#tmdb-api)
 
 
 ### Basic CRUD
-'''Python
+'''C#
+
 This is my views.py which enables to to complete the CRUD functionality
 def MovieLists_Create(request):
     if request.method == 'POST':

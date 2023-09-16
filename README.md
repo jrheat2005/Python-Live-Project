@@ -12,8 +12,7 @@ For the past two weeks of training at the tech academy, I worked on developing a
 
 
 ### Basic CRUD
-'''C#
-
+```Python
 This is my views.py which enables to to complete the CRUD functionality
 def MovieLists_Create(request):
     if request.method == 'POST':
@@ -57,4 +56,4 @@ def MovieLists_Delete(request, movie_list_id):
         return redirect('MovieLists_List')
     content = {'movie_list': movie_list}
     return render(request, 'MovieLists/MovieLists_Delete.html', content)
-
+```

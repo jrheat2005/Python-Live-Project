@@ -13,7 +13,7 @@ For the past two weeks of training at the tech academy, I worked on developing a
 
 ### Basic CRUD
 
-This is my views.py which enables to to complete the CRUD functionality
+REPLACE REPLACE REPLACE
 
 ```Python
 def MovieLists_Create(request):
@@ -58,4 +58,28 @@ def MovieLists_Delete(request, movie_list_id):
         return redirect('MovieLists_List')
     content = {'movie_list': movie_list}
     return render(request, 'MovieLists/MovieLists_Delete.html', content)
+```
+
+### TMDB API
+
+REPLACE REPLACE REPLACE 
+
+```Python
+
+```
+
+## Front End Stories
+* [Bootstrap](#bootstrap)
+* [CSS](#css)
+
+### Bootstrap
+
+```HTML
+
+
+```
+### CSS
+
+```CSS
+
 ```

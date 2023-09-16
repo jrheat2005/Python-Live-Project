@@ -12,8 +12,10 @@ For the past two weeks of training at the tech academy, I worked on developing a
 
 
 ### Basic CRUD
-```Python
+
 This is my views.py which enables to to complete the CRUD functionality
+
+```Python
 def MovieLists_Create(request):
     if request.method == 'POST':
         form = ListForm(request.POST)

@@ -3,17 +3,25 @@
 
 ## Introduction
 
-For the past two weeks of training at the tech academy, I worked on developing a full scale CRUD Web Application in Python. The app I choice to design and build was a Movie Lists app which sorted movies based off their ratings. This was a great learning expierence using Django, debugging, adding requested features. Through this sprint, One of the things I enjoyed doing the most was working on the [back end stories](#back-end-stories). I also got a great deal of expience from working on the [front end stories](#front-end-stories). I honestly believe the skills i learned from using Agile project managemnent will translate well and will be used greatly in my future careers. 
+For the past two weeks of training at the tech academy, I worked on developing a full scale CRUD Web Application in Python. The app I choice to design and build was a Movie Lists app which sorted movies based off their ratings. This was a great learning expierence using Django, debugging, adding requested features. Through this sprint, One of the things I enjoyed doing the most was working on the [back end stories](#back-end-stories). I honestly believe the skills i learned from using Agile project managemnent will translate well and will be used greatly in my future careers. 
 
 
 ## Back End Stories
 * [Basic CRUD](#basic-crud)
 * [TMDB API](#tmdb-api)
+* [IMDB Webscraping](#imdb-webscraping)
 
 
 ### Basic CRUD
 
-REPLACE REPLACE REPLACE
+For these stories, I implemented full CRUD (create, read, update, delete) functionality for movies on the website. This included:
+
+* Building forms to allow users to add new movies with details like ratings, genres, and descriptions.
+* Displaying the list of movies sorted by rating, allowing viewers to browse through the catalog.
+* Adding edit forms and links so users can update or modify existing movie entries if needed.
+* Adding delete buttons so users have the ability to remove movies from the list completely
+
+Below i have listed my views.py code created to accomplish that taks
 
 ```Python
 def MovieLists_Create(request):
@@ -62,24 +70,47 @@ def MovieLists_Delete(request, movie_list_id):
 
 ### TMDB API
 
-REPLACE REPLACE REPLACE 
+To keep in theme with my website i utlized a API to pull data from TMDB (The Movie DataBase) to display realtime to my website.
 
 ```Python
-
+def MovieLists_Api(request, tv_id):
+    base_url = 'https://api.themoviedb.org/3'
+    endpoint = f'{base_url}/tv/{tv_id}?api_key={api_key}'
+    response = requests.get(endpoint)
+    tv_data = response.json()
+    print(tv_data)
+    return render(request, 'MovieLists/MovieLists_Api.html', {'tv_data': tv_data})
 ```
+### IMDB Webscraping
+I was also tasked with using Beautiful Soup to create a webscraper that grabbed data from IMDB displaying the list of A24 movies to my website.
+```Python
+def MovieLists_BS(request):
+    headers = {"User-Agent": "Mozilla/5.0"}
+    page = requests.get('https://www.imdb.com/list/ls024372673/', headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
 
-## Front End Stories
-* [Bootstrap](#bootstrap)
-* [CSS](#css)
+    data = []
+    try:
+        for movie in soup.select('.lister-item'):
+            name = movie.find('h3', class_="lister-item-header").a.text
+            rank = movie.find('span', class_="lister-item-index unbold text-primary").text
+            star = movie.find('span', class_="ipl-rating-star__rating").text
+            metascore = movie.find('div', class_="inline-block ratings-metascore").span.text
+            score = movie.find('div', class_="list-description").text if movie.find('div', class_="list-description") else None
+            genre = movie.find('span', class_="genre").text.strip()
+            about = movie.find('p', class_="").text
 
-### Bootstrap
+            data.append({
+                'name': name,
+                'rank': rank,
+                'star': star,
+                'genre': genre,
+                'about': about,
+            })
 
-```HTML
+        print(data)
+    except Exception as e:
+        print(e)
 
-
-```
-### CSS
-
-```CSS
-
+    return render(request, 'MovieLists/MovieLists_BS.html', {'data': data})
 ```

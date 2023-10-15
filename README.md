@@ -21,7 +21,7 @@ For these stories, I implemented full CRUD (create, read, update, delete) functi
 * Adding edit forms and links so users can update or modify existing movie entries if needed.
 * Adding delete buttons so users have the ability to remove movies from the list completely
 
-Below i have listed my views.py code created to accomplish that taks
+Below i have listed my views.py code created to accomplish that task
 
 ```Python
 def MovieLists_Create(request):
